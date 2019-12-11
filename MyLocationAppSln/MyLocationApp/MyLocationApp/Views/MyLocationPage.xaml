@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="MyLocationApp.Views.MyLocationPage">
+
+    <StackLayout Padding="30" BackgroundColor="BlanchedAlmond">
+        <Frame>
+        <StackLayout>
+            <Editor Placeholder="Enter Notes"  />
+                <StackLayout Margin="10">
+                    <Label Text="How safe do you feel?" FontSize="15" TextColor="Black"/>
+                    <Slider BackgroundColor="WhiteSmoke" MinimumTrackColor="red" MaximumTrackColor="green" />
+                </StackLayout>
+            <FlexLayout JustifyContent="SpaceBetween">
+                    <Label Text="Show Location?" TextColor="black" FontSize="15"  />
+                <Switch BackgroundColor="WhiteSmoke"  />
+            </FlexLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text="Add" TextColor="black"  Command="{Binding AddLocationCommand}"  BackgroundColor="BurlyWood"  />
+                    <Button Text="Remove" TextColor="black"  Command="{Binding RemoveLocationCommand}" BackgroundColor="Gray"  />
+                </StackLayout>
+            </StackLayout>
+        </Frame>
+    </StackLayout>
+
+</ContentPage>
+    
+    

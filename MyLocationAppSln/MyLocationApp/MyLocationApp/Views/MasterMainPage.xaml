@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="http://prismlibrary.com"
+                  xmlns:converters="clr-namespace:MyLocationApp.Converters"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  x:Class="MyLocationApp.Views.MasterMainPage">
+
+    <MasterDetailPage.Master >
+        <ContentPage BackgroundColor="White" Title="Menu">
+            <StackLayout  BackgroundColor="BlanchedAlmond" >
+                <!-- TODO: // Update the Layout and add some real menu items  -->
+                <StackLayout BackgroundColor="White" >
+                    <Image Source="logo.png" Margin="30" WidthRequest="200" />
+                    <Label Text="Mangaliso Sreo" FontSize="25" TextColor="Black" Margin="20" HorizontalOptions="Center"/>
+                </StackLayout>
+                <ListView ItemTapped="ListView_ItemTapped" ItemsSource="{Binding MenuList}" HasUnevenRows="True"  >
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <ViewCell >
+
+
+                                <Grid Padding="20,0">
+                                    <Grid.RowDefinitions >
+                                        <RowDefinition  Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <Image Grid.Column="0" Grid.Row="0" Source="{Binding MenuItemImgSrc}"  WidthRequest="50" Margin="0,0,15,0" />
+                                    <Label Grid.Column="1" Grid.Row="0" Text="{Binding  MenuItemName}" TextColor="Black" FontSize="20" VerticalTextAlignment="Center"/>
+                                </Grid>
+
+
+
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+
+                    <ListView.Behaviors>
+                        <prism:EventToCommandBehavior EventName="ItemTapped"
+                                                      Command="{Binding NavigateCommand}"
+                                                      EventArgsConverter="{converters:ItemTappedEventArgsConverter}"/>
+                    </ListView.Behaviors>
+
+                </ListView>
+            </StackLayout>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    
+</MasterDetailPage>
+    
+    

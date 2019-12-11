@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="MyLocationApp.Views.LoginPage">
+
+    <ScrollView BackgroundColor="BlanchedAlmond">
+        <StackLayout Padding="20">
+            <StackLayout >
+                <Image Source="applogo.png"/>
+            </StackLayout>
+            <Frame >
+                <StackLayout Padding="10">
+                    <Label Text="SIGN IN" TextColor="Black"  FontSize="25" FontAttributes="Bold" />
+                    <Entry Placeholder="Email"
+                           Keyboard="Email" Text="{Binding Login.UserEmail}" PlaceholderColor="Gray"  TextColor="BurlyWood"  />
+                    <Entry Placeholder="Password" PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding Login.UserPassword}"  IsPassword="True"  />
+                    <Button Text="Sign In" Command="{Binding SignInCommand}" BackgroundColor="BurlyWood"  />
+            </StackLayout>
+            </Frame>
+            <StackLayout>
+                <Label Text="Do not have an account yet?" HorizontalOptions="End" TextColor="Black" FontSize="15" VerticalOptions="End" />
+                <Button Text="Sign Up" Command="{Binding SignUpCommand}"  HorizontalOptions="End" VerticalOptions="End" BackgroundColor="gray"  WidthRequest="100" />
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+    
+</ContentPage>
+    

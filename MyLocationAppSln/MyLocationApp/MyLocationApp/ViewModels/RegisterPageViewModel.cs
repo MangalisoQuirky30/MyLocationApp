@@ -49,8 +49,6 @@ namespace MyLocationApp.ViewModels
                 UserConfirmPassword = userInfo.UserConfirmPassword
             };
 
-
-
             var client = new HttpClient();
             var url = "http://10.0.2.2:5000/registration";
 
@@ -65,15 +63,11 @@ namespace MyLocationApp.ViewModels
             {
                 var mess = ex.Message;
             }
-
-
             await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/LoginPage", useModalNavigation: true);
         }
 
         async void ExecuteNavSignInCommand()
         {
-
-
             await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/LoginPage", useModalNavigation: true);
         }
     }

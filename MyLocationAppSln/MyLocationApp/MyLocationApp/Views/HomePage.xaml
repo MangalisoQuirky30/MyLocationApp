@@ -10,7 +10,7 @@
     <ScrollView >
         <StackLayout >
             <maps:Map x:Name="Map"
-                  ItemsSource="{Binding Locations}">
+                  ItemsSource="{Binding PositionList}">
                 <maps:Map.ItemTemplate>
                     <DataTemplate>
                         <maps:Pin Position="{Binding Position}"

@@ -3,87 +3,37 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace MyLocationApp.Models
 {
-    public class RegistrationAPI : INotifyPropertyChanged
-    {
+    public class RegistrationAPI
+    { 
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-
-        public string userName;
-        public string UserName
-        {
-            get { return userName; }
-            set
-            {
-                userName = value;
-                OnPropertyChanged("UserName");
-            }
-        }
+        public string UserName;
 
 
 
 
-        public string userEmail;
-        public string UserEmail
-        {
-            get { return userEmail; }
-            set
-            {
-                userEmail = value;
-                OnPropertyChanged("UserEmail");
-            }
-        }
 
-
-        public string userPhoneNumber;
-        public string UserPhoneNumber
-        {
-            get { return userPhoneNumber; }
-            set
-            {
-                userPhoneNumber = value;
-                OnPropertyChanged("UserPhoneNumber");
-            }
-        }
-
-
-        public string userPassword;
-        public string UserPassword
-        {
-            get { return userPassword; }
-            set
-            {
-                userPassword = value;
-                OnPropertyChanged("UserPassword");
-            }
-        }
-
-
-        public string userConfirmPassword;
-        public string UserConfirmPassword
-        {
-            get { return userConfirmPassword; }
-            set
-            {
-                userConfirmPassword = value;
-                OnPropertyChanged("UserConfirmPassword");
-            }
-        }
+        public string UserEmail;
 
 
 
-        [System.ComponentModel.DataAnnotations.Key]
+        public string UserPhoneNumber;
+
+
+        public string UserPassword;
+
+
+
+        public string UserConfirmPassword;
+
+
+
+
+        [Key]
         public int UserID { get; }
     }
 }

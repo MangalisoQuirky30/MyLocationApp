@@ -93,7 +93,8 @@ namespace MyLocationApp.Services
                 {
                 Address = firstPin.SubLocality,
                 Description = firstPin.FeatureName,
-                Position = new Xamarin.Forms.Maps.Position(loc.Latitude, loc.Longitude)
+                Latitude = loc.Latitude,
+                Longitude = loc.Longitude
                 };
 
                 return myLocation;
@@ -106,7 +107,7 @@ namespace MyLocationApp.Services
 
     //return new MyLocation(firstPin.SubLocality, firstPin.FeatureName, new Xamarin.Forms.Maps.Position(loc.Latitude, loc.Longitude));
 
-}
+} 
     }
 }
 

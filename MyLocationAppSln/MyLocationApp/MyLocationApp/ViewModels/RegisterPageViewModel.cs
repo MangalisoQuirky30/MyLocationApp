@@ -1,14 +1,12 @@
 ﻿using MyLocationApp.Models;
-using MyLocationApp.Services;
 using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
-using MyLocationApp.Services;
+using System.Net.Http;
+using Newtonsoft.Json;
+using Prism.Services;
+using System.Text;
 
 namespace MyLocationApp.ViewModels
 {
@@ -17,10 +15,13 @@ namespace MyLocationApp.ViewModels
         public Registration userInfo { get; set; }
 
 
+        private IPageDialogService _pageDialogService;
+
         readonly ObservableCollection<Registration> _allUsers;
         public readonly INavigationService NavigationService;
-        public RegisterPageViewModel(INavigationService navigationService) : base(navigationService)
+        public RegisterPageViewModel(INavigationService navigationService , IPageDialogService pageDialogService) : base(navigationService)
         {
+            _pageDialogService = pageDialogService;
             NavigationService = navigationService;
             var regInfo = new Registration();
             userInfo = regInfo;
@@ -48,20 +49,32 @@ namespace MyLocationApp.ViewModels
                 UserConfirmPassword = userInfo.UserConfirmPassword
             };
 
-            // var sqlite = new SQLiteMethods();
 
-            var database = SQLiteMethods.Database;
-            await database.InsertAsync(reg);
-                //SaveItemAsync(reg);
 
-             await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/LoginPage");
+            var client = new HttpClient();
+            var url = "http://10.0.2.2:5000/registration";
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(reg);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var result = await client.PostAsync(url, content);
+                await _pageDialogService.DisplayAlertAsync("Happiness", result.ReasonPhrase, "Cool");
+            }
+            catch (Exception ex)
+            {
+                var mess = ex.Message;
+            }
+
+
+            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/LoginPage", useModalNavigation: true);
         }
 
         async void ExecuteNavSignInCommand()
         {
 
 
-            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/LoginPage");
+            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/LoginPage", useModalNavigation: true);
         }
     }
 }

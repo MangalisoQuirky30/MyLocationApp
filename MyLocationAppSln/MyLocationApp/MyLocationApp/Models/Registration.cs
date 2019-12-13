@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace MyLocationApp.Models
@@ -18,7 +19,7 @@ namespace MyLocationApp.Models
             }
         }
 
-
+        [Required]
         public string userName;
         public string UserName 
         {
@@ -35,7 +36,7 @@ namespace MyLocationApp.Models
         public int UserID { get; }
 
 
-
+        [Required]
         public string userEmail;
         public string UserEmail
         {
@@ -47,7 +48,7 @@ namespace MyLocationApp.Models
             }
         }
 
-
+        [Required]
         public string userPhoneNumber;
         public string UserPhoneNumber
         {
@@ -59,7 +60,7 @@ namespace MyLocationApp.Models
             }
         }
 
-
+        [Required]
         public string userPassword;
         public string UserPassword
         {
@@ -71,7 +72,7 @@ namespace MyLocationApp.Models
             }
         }
 
-
+        [Required]
         public string userConfirmPassword;
         public string UserConfirmPassword
         {

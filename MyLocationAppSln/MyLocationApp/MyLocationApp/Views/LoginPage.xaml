@@ -13,9 +13,9 @@
             <Frame >
                 <StackLayout Padding="10">
                     <Label Text="SIGN IN" TextColor="Black"  FontSize="25" FontAttributes="Bold" />
-                    <Entry Placeholder="Email"
-                           Keyboard="Email" Text="{Binding Login.UserEmail}" PlaceholderColor="Gray"  TextColor="BurlyWood"  />
-                    <Entry Placeholder="Password" PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding Login.UserPassword}"  IsPassword="True"  />
+                    <Entry x:Name="userEmailTxt" Placeholder="Email"
+                           Keyboard="Email" Text="{Binding userInfo.UserEmail}" PlaceholderColor="Gray"  TextColor="BurlyWood"  />
+                    <Entry x:Name="userPasswordTxt" Placeholder="Password" PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserPassword}"  IsPassword="True"  />
                     <Button Text="Sign In" Command="{Binding SignInCommand}" BackgroundColor="BurlyWood"  />
             </StackLayout>
             </Frame>

@@ -11,11 +11,11 @@
             <Frame>
             <StackLayout>
                     <Label Text="SIGN UP" TextColor="Black"  FontSize="25" FontAttributes="Bold" />
-                <Entry Placeholder="Name"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserName}"  />
-                <Entry Placeholder="Phone Number"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserPhoneNumber}"  />
-                <Entry Placeholder="Email"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserEmail}"  />
-                <Entry Placeholder="Password"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserPassword}" />
-                <Entry Placeholder="Confirm Password"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserConfirmPassword}" />
+                <Entry Placeholder="Name"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserName}" Keyboard="Text" />
+                <Entry Placeholder="Phone Number"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserPhoneNumber}" Keyboard="Numeric"  />
+                    <Entry Placeholder="Email"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserEmail}" Keyboard="Email" />
+                    <Entry Placeholder="Password"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserPassword}" IsPassword="True" />
+                    <Entry Placeholder="Confirm Password"  PlaceholderColor="Gray"  TextColor="BurlyWood" Text="{Binding userInfo.UserConfirmPassword}" IsPassword="True" />
                 <Button Text="Sign Up" Command="{Binding SignUpCommand}" BackgroundColor="BurlyWood"  />
                 </StackLayout>
             </Frame>

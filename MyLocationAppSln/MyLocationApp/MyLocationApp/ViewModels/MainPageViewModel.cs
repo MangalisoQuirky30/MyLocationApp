@@ -19,7 +19,7 @@ namespace MyLocationApp.ViewModels
 
         async void ExecuteRegisterCommand()
         {
-            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/MainPage/RegisterPage");
+            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/MainPage/RegisterPage", useModalNavigation: true);
         }
         private DelegateCommand _loginCommand;
         public DelegateCommand LoginCommand =>
@@ -28,7 +28,7 @@ namespace MyLocationApp.ViewModels
 
         async void ExecuteLoginCommand()
         {
-            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/MainPage/LoginPage");
+            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/MainPage/LoginPage", useModalNavigation: true);
 
         }
         public MainPageViewModel(INavigationService navigationService)

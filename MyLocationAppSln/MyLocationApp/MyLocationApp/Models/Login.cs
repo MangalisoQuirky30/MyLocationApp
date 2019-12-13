@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MyLocationApp.Models
 {
-    class Login : INotifyPropertyChanged
+    public class Login : INotifyPropertyChanged
     {
 
         public event PropertyChangedEventHandler PropertyChanged;

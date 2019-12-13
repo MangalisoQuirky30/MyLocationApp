@@ -1,5 +1,7 @@
 ﻿using MyLocationApp.Messages;
+using MyLocationApp.Models;
 using MyLocationApp.Services;
+using Newtonsoft.Json;
 using Prism.Commands;
 using Prism.Events;
 using Prism.Mvvm;
@@ -8,6 +10,7 @@ using Prism.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using Xamarin.Essentials;
 
 namespace MyLocationApp.ViewModels
@@ -17,6 +20,7 @@ namespace MyLocationApp.ViewModels
         private IPageDialogService _pageDialogService;
         private IEventAggregator _eventAggregator;
 
+        public Login userInfo { get; set; }
         public LoginPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService, IEventAggregator eventAggregator)
            : base(navigationService)
         {
@@ -24,6 +28,8 @@ namespace MyLocationApp.ViewModels
 
             _pageDialogService = pageDialogService;
             _eventAggregator = eventAggregator;
+            var regInfo = new Login();
+            userInfo = regInfo;
         }
 
         private DelegateCommand _SignUpCommand;
@@ -37,7 +43,7 @@ namespace MyLocationApp.ViewModels
         async void ExecuteSignUpCommand()
         {
 
-            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/RegisterPage");
+            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/RegisterPage", useModalNavigation: true);
         }
 
         async void ExecuteSignInCommand()
@@ -48,9 +54,43 @@ namespace MyLocationApp.ViewModels
             {
                 CheckStatus.LoggedIn = true;
                 _eventAggregator.GetEvent<LoginMessage>().Publish();
-                await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/HomePage");
                 // Connection to internet is available
-                await _pageDialogService.DisplayAlertAsync("Internet", "Awesome, you have internet access", "Ok");
+
+                HttpClient client = new HttpClient();
+                string allUsers = await client.GetStringAsync("http://10.0.2.2:5000/registration");
+                var user = allUsers.Substring(1, 139);
+                var jokes = JsonConvert.DeserializeObject<Registration>(user);
+
+
+                var reg = new Login()
+                {
+                    UserEmail = userInfo.UserEmail,
+                    UserPassword = userInfo.UserPassword
+                };
+
+                var email = reg.userEmail;
+                var pass = reg.UserPassword;
+
+                if(email != null && pass != null)
+                {
+                    if (allUsers.Contains(email) && allUsers.Contains(pass))
+                    {
+                        await _pageDialogService.DisplayAlertAsync("Internet", "You have been successly signed in.", "Ok");
+                        await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/HomePage", useModalNavigation: true);
+
+                    }
+                    else
+                    {
+                        await _pageDialogService.DisplayAlertAsync("SIGN IN", "Invalid credentails", "OK");
+                    }
+
+                } else
+                {
+                    await _pageDialogService.DisplayAlertAsync("SIGN IN", "Please fill in missing blocks", "OK");
+
+                }
+
+
             }
             else
             {

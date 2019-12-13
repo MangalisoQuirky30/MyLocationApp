@@ -89,6 +89,10 @@ namespace MyLocationApp.ViewModels
 
         private async void ExecuteAddLocation()
         {
+            HttpClient client = new HttpClient();
+            var url = "http://10.0.2.2:5000/location";
+
+
             try
             {
 
@@ -96,12 +100,10 @@ namespace MyLocationApp.ViewModels
                 _locations.Add(newLocation);
 
                 await _sqliteMethods.SaveNewLocationAsync(newLocation);
-
-                //await PostMyLocationAPI(newLocation);
-                HttpClient client = new HttpClient();
+                
                 var json = JsonConvert.SerializeObject(_locations);
                 var content = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-                var response = await client.PostAsync("https://10.0.2.2:44346/MyLocationAPIs", content);
+                var response = await client.PostAsync(url, content);
 
                 await _pageDialogService.DisplayAlertAsync("Exception", response.ReasonPhrase, "Ok");
             }
@@ -111,6 +113,17 @@ namespace MyLocationApp.ViewModels
             }
         }
 
+
+        /*  
+            var client = new HttpClient();
+            var url = "http://10.0.2.2:5000/registration";
+
+            try
+            {
+                var json = JsonConvert.SerializeObject(reg);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+                var result = await client.PostAsync(url, content);
+                await _pageDialogService.DisplayAlertAsync("Happiness", result.ReasonPhrase, "Cool");*/
 
         public async void GetData()
         {

@@ -23,7 +23,7 @@ namespace MyLocationApp.Services
             var dbPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "LocationsSQLite.db3");
             database = new SQLiteAsyncConnection(dbPath);
             database.CreateTableAsync<Registration>().Wait();
-            //database.CreateTableAsync<MyLocation>().Wait();
+            database.CreateTableAsync<MyLocation>().Wait();
         }
 
         public static SQLiteAsyncConnection Database

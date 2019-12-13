@@ -9,6 +9,7 @@ using Prism.Navigation;
 using Prism.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using Xamarin.Essentials;
@@ -59,7 +60,7 @@ namespace MyLocationApp.ViewModels
                 HttpClient client = new HttpClient();
                 string allUsers = await client.GetStringAsync("http://10.0.2.2:5000/registration");
                 var user = allUsers.Substring(1, 139);
-                var jokes = JsonConvert.DeserializeObject<Registration>(user);
+                var everyone = JsonConvert.DeserializeObject<ObservableCollection<Registration>>(user);
 
 
                 var reg = new Login()
@@ -67,28 +68,33 @@ namespace MyLocationApp.ViewModels
                     UserEmail = userInfo.UserEmail,
                     UserPassword = userInfo.UserPassword
                 };
-
                 var email = reg.userEmail;
                 var pass = reg.UserPassword;
 
-                if(email != null && pass != null)
-                {
-                    if (allUsers.Contains(email) && allUsers.Contains(pass))
-                    {
-                        await _pageDialogService.DisplayAlertAsync("Internet", "You have been successly signed in.", "Ok");
-                        await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/HomePage", useModalNavigation: true);
 
+                for (var i = 0; i < everyone.Count; i++)
+                {
+                    if (email != null && pass != null)
+                    {
+                        if (everyone[i].UserEmail == email && everyone[i].UserPassword == pass)
+                        {
+                            await _pageDialogService.DisplayAlertAsync("Internet", "You have been successly signed in.", "Ok");
+                            await NavigationService.NavigateAsync("MasterMainPage/NavigationPage/HomePage", useModalNavigation: true);
+                        }
+                        else
+                        {
+                            await _pageDialogService.DisplayAlertAsync("SIGN IN", "You have entered invalid credentails. Please try again.", "OK");
+                        }
                     }
                     else
                     {
-                        await _pageDialogService.DisplayAlertAsync("SIGN IN", "Invalid credentails", "OK");
+                        await _pageDialogService.DisplayAlertAsync("SIGN IN", "Please fill in missing blocks", "OK");
                     }
-
-                } else
-                {
-                    await _pageDialogService.DisplayAlertAsync("SIGN IN", "Please fill in missing blocks", "OK");
-
                 }
+
+               
+
+               
 
 
             }

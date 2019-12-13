@@ -17,18 +17,16 @@ namespace MyLocatorWebAPI.Data
                 regContext.RegistrationAPIUsers.AddRange(
                     new RegistrationAPI
                     {
-                        userConfirmPassword = "Squeaky Bone",
-                        userEmail = "ghjkf",
-                        userID = 5,
-                        userName = "fergre"
+                        userEmail = "mango@gmail.com",
+                        userName = "Mangaliso Sereo" ,
+                        userPassword = "11111"
                     },
 
                     new RegistrationAPI
                     {
-                        userConfirmPassword = "Squeaky Bone",
-                        userEmail = "ghjkf",
-                        userID = 5,
-                        userName = "fergre"
+                        userEmail = "sereo@gmail.com",
+                        userName = "Sereo",
+                        userPassword = "11111"
                     }
                 );
 
